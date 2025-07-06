@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>NIRANJAN CREATIONS</title>
+        </head>
+        <body style="background-color:black;" onload="score()">
+                <h1 style="color:yellow;text-align:center;background-color:red;">SNACK AND LADER</h1>
+                <img src="https://hacker1514.github.io./Snack-lader/snack%20and%20lader.jpg" style="position:absolute;left:200px;top:150px;" width=500px;height=500px;>
+                <h1 id="player1" style="color:black;position:absolute;left:10px;top:62px;px;">PLAYER1 SCORE: </h1>
+                <h1 id="player2"  style="color:black;position:absolute;right:10px;top:62px;">PLAYER2 SCORE: </h1>
+                <img id="p1" style="position:absolute;left:200px;top:600px;"src="https://hacker1514.github.io./Snack-lader/player1.png" width=50px; height=50px;>
+                <img id="p2" style="position:absolute;left:200px;top:600px;"src="https://hacker1514.github.io./Snack-lader/player2.png" width=50px; height=50px;>
+                <button style="background-color:blue;color:orange;font-size:35px;position:absolute;left:10px;top:660px;" onclick="location.reload();">RESTART</button>
+                <h1 style=background-color:green;">.</h2>
+                <button  onclick="disc()" style="background-color:blue;color:orange;position:absolute;left:390px;top:660px;font-size:35px;">ROLL DICE</button>
+                <h1 id= "d1" style="color:cyan;position:absolute;left:190px;top:643px;">PLAYER1: </h1>
+                <h1 id="d2" style="color:red;position:absolute;left:600px;top:643px;">PLAYER2: </h1>
+                <script>
+                        let s1=0,s2=0,d=1;
+                        function score(){
+                                document.getElementById("player1").innerHTML="PLAYER1 SCORE: "+s1;
+                                document.getElementById("player2").innerHTML="PLAYER2 SCORE: "+s2;
+                        }
+                        function disc(){
+                                let s=Math.floor(Math.random()*6)+1;
+                                if(d === 1){
+                                        document.getElementById("d2").innerHTML="";
+                                        document.getElementById("d1").innerHTML="PLAYER1: "+s;
+                                        if(s1+s<=100){
+                                                s1=s1+s;}
+                                        d=2;
+                                }else{  document.getElementById("d1").innerHTML="";
+                                        document.getElementById("d2").innerHTML="PLAYER2: "+s;
+                                        if(s2+s<=100){
+                                        s2=s2+s;
+                                        }
+                                        d=1;
+                                }
+                                display();
+                                score();
+                                if(s1===100){
+                                        alert("PLAYER1 WIN");
+                                        location.reload();
+                                }else if(s2===100){
+                                        alert("PLAYER2 WIN");
+                                        location.reload();
+                                }
+                        }
+                        function display() {
+    const moves = {
+        10: 22, 14: 9, 15: 36, 19: 4, 20: 39, 34: 24,
+        37: 17, 53: 32, 54: 74, 57: 48, 65: 45, 69: 49,
+        71: 91, 72: 63, 76: 95, 80: 99, 88: 67, 94: 83, 97: 86
+    };
+
+    if (moves[s1]) s1 = moves[s1];
+    if (moves[s2]) s2 = moves[s2];
+    let pos1 = getPosition(s1);
+    let pos2 = getPosition(s2);
+    document.getElementById("p1").style.left = pos1.x + "px";
+    document.getElementById("p1").style.top = pos1.y + "px";
+
+    document.getElementById("p2").style.left = pos2.x + "px";
+    document.getElementById("p2").style.top = pos2.y + "px";
+}
+                        function getPosition(score) {
+    if (score === 0) return { x: 200, y: 600 };
+
+    let row = Math.floor((score - 1) / 10);
+    let col = (score - 1) % 10;
+    if (row % 2 === 1) {
+        col = 9 - col;
+    }
+    let x = 200 + (col * 50);
+    let y = 600 - (row * 50);
+
+    return { x: x, y: y };
+}
+                </script>
+
+        </body>
+</html>
